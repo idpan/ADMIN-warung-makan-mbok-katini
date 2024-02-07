@@ -1,0 +1,70 @@
+:root {
+  --main-color: hsl(45, 87%, 50%);
+  --accent-color: hsl(45, 87%, 30%);
+  --text-color: hsl(0, 0%, 89%);
+  --main-bg-color: hsl(45, 87%, 95%);
+  --main-color-dark: hsl(35, 100%, 20%);
+}
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+body {
+  min-height: 100vh;
+  width: 100%;
+}
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 200px auto;
+}
+aside {
+  color: var(--text-color);
+  background-color: var(--accent-color);
+
+  min-width: 200px;
+  height: 100vh;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main {
+  padding: 20px 30px 100px 30px;
+  background-color: var(--main-bg-color);
+}
+td {
+  padding: 20px;
+}
+thead {
+  color: var(--text-color);
+  background-color: var(--accent-color);
+}
+
+/* modify daisyUi class */
+.menu * {
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+.menu .active {
+  background-color: var(--main-color-dark) !important;
+
+  border-radius: 0 !important;
+}
+.menu .active a {
+}
+.menu a:hover {
+  color: white !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+.menu {
+  width: 100%;
+  padding: 0;
+}
+.menu a {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  font-size: 18px;
+}
