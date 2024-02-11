@@ -6,17 +6,24 @@ import GenericTable from "../../../components/molecule/menu/GenericTable";
 import TableRowWithDetail from "../../../components/molecule/menu/TableRowWithDetail";
 import useFetchNasiBox from "../../../hooks/fetch/useFetchNasiBox";
 import PageTitle from "../../../components/atom/PageTitle";
+import useAuthContext from "../../../hooks/context/useAuthContext";
 
 function NasiBox() {
   const { menu, dispatchMenu } = useNasiBoxContext();
-  if (!menu) {
-    useFetchNasiBox();
+  const { user } = useAuthContext();
+  if (user) {
+    if (!menu) {
+      useFetchNasiBox();
+    }
   }
   async function handleDelete(id) {
     const res = await fetch(
       import.meta.env.VITE_API_SERVER + "/api/nasi-box/" + id,
       {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${user.token}`,
+        },
       }
     );
     if (!res.ok) {

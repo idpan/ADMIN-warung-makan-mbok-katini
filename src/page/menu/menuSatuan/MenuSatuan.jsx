@@ -6,14 +6,19 @@ import GenericTable from "../../../components/molecule/menu/GenericTable";
 import EditableTableRow from "../../../components/molecule/menu/EditableTableRow";
 import useFetchMenuSatuan from "../../../hooks/fetch/useFetchMenuSatuan";
 import PageTitle from "../../../components/atom/PageTitle";
+import useAuthContext from "../../../hooks/context/useAuthContext";
 
 function MenuSatuan() {
   const { menu, dispatchMenu } = useMenuSatuanContext();
+  const { user } = useAuthContext();
   async function handleDelete(id) {
     const res = await fetch(
       import.meta.env.VITE_API_SERVER + "/api/menu-satuan/" + id,
       {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${user.token}`,
+        },
       }
     );
     const json = await res.json();
@@ -25,8 +30,10 @@ function MenuSatuan() {
       dispatchMenu({ type: "DELETE", payload: id });
     }
   }
-  if (!menu) {
-    useFetchMenuSatuan();
+  if (user) {
+    if (!menu) {
+      useFetchMenuSatuan();
+    }
   }
   const columns = [
     { key: "order", header: "No." },

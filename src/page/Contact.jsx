@@ -6,11 +6,15 @@ import handlePatch from "../helper/handlePatch";
 import EditingRow from "../components/molecule/EditingRow";
 import EditingPanel from "../components/molecule/EditingPanel";
 import PageTitle from "../components/atom/PageTitle";
+import useAuthContext from "../hooks/context/useAuthContext";
 
 export default function Contact() {
   const { contact, dispatchContact } = useContactContext();
-  if (!contact) {
-    useFetchContact();
+  const { user } = useAuthContext();
+  if (user) {
+    if (!contact) {
+      useFetchContact();
+    }
   }
   async function handleSubmit(body) {
     const api_url = import.meta.env.VITE_API_SERVER + "/api/contact/1";

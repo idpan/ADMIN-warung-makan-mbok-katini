@@ -10,11 +10,12 @@ import PageTitle from "../../../components/atom/PageTitle";
 import ContainerInput from "../../../components/atom/ContainerInput";
 import SubmitButton from "../../../components/atom/button/SubmitButton";
 import BackToMenuButton from "../../../components/atom/button/BackToMenuButton";
+import useAuthContext from "../../../hooks/context/useAuthContext";
 
 function NasiBoxCreate() {
   const [formValues, setFormValues] = useState({});
   const { dispatchMenu } = useNasiBoxContext();
-
+  const { user } = useAuthContext();
   const handleInputChange = (fieldName, value) => {
     setFormValues({
       ...formValues,
@@ -35,7 +36,7 @@ function NasiBoxCreate() {
 
     const api_url = import.meta.env.VITE_API_SERVER + "/api/nasi-box";
 
-    const { respon, json } = await handlePost(api_url, formData);
+    const { respon, json } = await handlePost(api_url, formData, user.token);
 
     if (!respon.ok) {
       throw respon.error;

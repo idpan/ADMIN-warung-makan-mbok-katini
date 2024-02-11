@@ -7,11 +7,15 @@ import EditingRow from "../components/molecule/EditingRow";
 import EditingPanel from "../components/molecule/EditingPanel";
 import EditableImage from "../components/molecule/EditableImage";
 import PageTitle from "../components/atom/PageTitle";
+import useAuthContext from "../hooks/context/useAuthContext";
 
 function Content() {
   const { content, dispatchContent } = useContentContext();
-  if (!content) {
-    useFetchContent();
+  const { user } = useAuthContext();
+  if (user) {
+    if (!content) {
+      useFetchContent();
+    }
   }
   async function handleEdit(body) {
     const api_url = import.meta.env.VITE_API_SERVER + "/api/content/1";

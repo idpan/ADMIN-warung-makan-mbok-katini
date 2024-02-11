@@ -1,8 +1,12 @@
 import React from "react";
 
-function SubmitButton({ children }) {
+function SubmitButton({ disabled, children }) {
   return (
-    <button type="submit" className="btn btn-success  text-slate-50 mt-3">
+    <button
+      disabled={disabled}
+      type="submit"
+      className="btn btn-success  text-slate-50 mt-3"
+    >
       {children}
     </button>
   );

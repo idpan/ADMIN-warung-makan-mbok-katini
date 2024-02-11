@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import App from "./App.jsx";
 import "./index.css";
@@ -20,31 +24,42 @@ import DetailTumpeng from "./page/menu/tumpeng/DetailTumpeng.jsx";
 import DetailNasiBox from "./page/menu/nasiBox/DetailNasiBox.jsx";
 import TumpengCreate from "./page/menu/tumpeng/TumpengCreate.jsx";
 import MenuSatuanCreate from "./page/menu/menuSatuan/MenuSatuanCreate.jsx";
+import Login from "./page/Login.jsx";
+import { AuthContextProvider } from "./contexts/AuthContext.jsx";
 
 const router = createBrowserRouter([
+  { path: "*", element: <Navigate to="/" /> },
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <App />,
     children: [
       {
-        path: "/content",
+        path: "/",
+        element: <Navigate to="content" />,
+      },
+      {
+        path: "content",
         element: <Content />,
       },
 
       {
-        path: "/contact",
+        path: "contact",
         element: <Contact />,
       },
       {
-        path: "/menu",
+        path: "menu",
         element: <Menu />,
         children: [
           {
-            path: "menu-satuan",
+            path: "/menu",
             element: <MenuSatuan />,
           },
           {
-            path: "/menu/",
+            path: "menu-satuan",
             element: <MenuSatuan />,
           },
           {
@@ -69,16 +84,18 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ContactContextProvider>
-      <ContentContextProvider>
-        <TumpengContextProvider>
-          <NasiBoxContextProvider>
-            <MenuSatuanContextProvider>
-              <RouterProvider router={router} />
-            </MenuSatuanContextProvider>
-          </NasiBoxContextProvider>
-        </TumpengContextProvider>
-      </ContentContextProvider>
-    </ContactContextProvider>
+    <AuthContextProvider>
+      <ContactContextProvider>
+        <ContentContextProvider>
+          <TumpengContextProvider>
+            <NasiBoxContextProvider>
+              <MenuSatuanContextProvider>
+                <RouterProvider router={router} />
+              </MenuSatuanContextProvider>
+            </NasiBoxContextProvider>
+          </TumpengContextProvider>
+        </ContentContextProvider>
+      </ContactContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>
 );

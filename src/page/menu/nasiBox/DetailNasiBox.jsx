@@ -9,10 +9,12 @@ import useNasiBoxContext from "../../../hooks/context/useNasiBoxContext";
 import EditableImage from "../../../components/molecule/EditableImage";
 import EditableSelect from "../../../components/molecule/EditableSelect";
 import PageTitle from "../../../components/atom/PageTitle";
+import useAuthContext from "../../../hooks/context/useAuthContext";
 
 function DetailNasiBox() {
   const { id } = useParams();
   const { menu, dispatchMenu } = useNasiBoxContext();
+  const { user } = useAuthContext();
   const nasiBox = getNasiBoxById(id, menu);
   async function handleEdit(body) {
     const api_url = import.meta.env.VITE_API_SERVER + "/api/menu/" + id;
@@ -32,7 +34,7 @@ function DetailNasiBox() {
       console.log(key);
       formData.append(key, body[key]);
     }
-    const { respon, json } = await handlePatch(api_url, formData);
+    const { respon, json } = await handlePatch(api_url, formData, user.token);
     if (!respon.ok) {
       throw Error;
     }

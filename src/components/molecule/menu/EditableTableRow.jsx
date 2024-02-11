@@ -6,17 +6,18 @@ import handlePatch from "../../../helper/handlePatch";
 import useMenuSatuanContext from "../../../hooks/context/useMenuSatuanContext";
 import EditableSelect from "../EditableSelect";
 import EditableImage from "../EditableImage";
+import useAuthContext from "../../../hooks/context/useAuthContext";
 
 function EditableTableRow({ rowNumber, item, onDelete }) {
   const { menu, dispatchMenu } = useMenuSatuanContext();
-
+  const { user } = useAuthContext();
   async function handleEdit(id, data) {
     const api_url = import.meta.env.VITE_API_SERVER + "/api/menu-satuan/" + id;
     const formData = new FormData();
     for (let key in data) {
       formData.append(key, data[key]);
     }
-    const { respon, json } = await handlePatch(api_url, formData);
+    const { respon, json } = await handlePatch(api_url, formData, user.token);
     if (!respon.ok) {
       throw Error;
     }

@@ -12,6 +12,7 @@ html {
 body {
   min-height: 100vh;
   width: 100%;
+  background-color: var(--main-bg-color);
 }
 .main-wrapper {
   display: grid;
@@ -33,7 +34,6 @@ aside {
 }
 main {
   padding: 20px 30px 100px 30px;
-  background-color: var(--main-bg-color);
 }
 td {
   padding: 20px;

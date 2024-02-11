@@ -23,7 +23,7 @@ function InputText({ required, id, className, onInputChange, isTextarea }) {
         <input
           required={required}
           id={id}
-          className={`input input-bordered w-full max-w-xs ${className}`}
+          className={`input input-bordered rounded-none w-full max-w-xs ${className}`}
           type="text"
           value={input}
           onChange={handleChange}

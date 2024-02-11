@@ -6,17 +6,24 @@ import TableRowWithDetail from "../../../components/molecule/menu/TableRowWithDe
 import AddMenuButton from "../../../components/atom/button/AddMenuButton";
 import useFetchTumpeng from "../../../hooks/fetch/useFetchTumpeng";
 import PageTitle from "../../../components/atom/PageTitle";
+import useAuthContext from "../../../hooks/context/useAuthContext";
 
 function Tumpeng() {
   const { menu, dispatchMenu } = useTumpengContext();
-  if (!menu) {
-    useFetchTumpeng();
+  const { user } = useAuthContext();
+  if (user) {
+    if (!menu) {
+      useFetchTumpeng();
+    }
   }
   async function handleDelete(id) {
     const res = await fetch(
       import.meta.env.VITE_API_SERVER + "/api/tumpeng/" + id,
       {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${user.token}`,
+        },
       }
     );
     if (!res.ok) {
