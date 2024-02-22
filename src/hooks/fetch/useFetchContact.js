@@ -7,11 +7,14 @@ export default function useFetchContact() {
   const { user } = useAuthContext();
   useEffect(() => {
     async function getContact() {
-      const resContact = await fetch("http://localhost:8000/api/contact", {
-        headers: {
-          authorization: `Bearer ${user.token}`,
-        },
-      });
+      const resContact = await fetch(
+        import.meta.env.VITE_API_SERVER + "/api/contact",
+        {
+          headers: {
+            authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const jsonContact = await resContact.json();
       const dataContact = jsonContact.data;
 

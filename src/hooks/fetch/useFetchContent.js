@@ -7,11 +7,14 @@ export default function useFetchContent() {
   const { user } = useAuthContext();
   useEffect(() => {
     async function getContent() {
-      const resContent = await fetch("http://localhost:8000/api/content", {
-        headers: {
-          authorization: `Bearer ${user.token}`,
-        },
-      });
+      const resContent = await fetch(
+        import.meta.env.VITE_API_SERVER + "/api/content",
+        {
+          headers: {
+            authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       const jsonContent = await resContent.json();
       const dataContent = jsonContent.data;
 
