@@ -77,7 +77,6 @@ const router = createBrowserRouter([
       { path: "/menu/nasi-box/detail/:id", element: <DetailNasiBox /> },
       { path: "/menu/tumpeng/add", element: <TumpengCreate /> },
       { path: "/menu/nasi-box/add", element: <NasiBoxCreate /> },
-      // { path: "/menu/tumpeng/add", element: <TestUpdate /> },
       { path: "/menu/menu-satuan/add", element: <MenuSatuanCreate /> },
     ],
   },
