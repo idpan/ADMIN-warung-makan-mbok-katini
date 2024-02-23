@@ -20,15 +20,11 @@ function Content() {
   async function handleEdit(body) {
     const api_url = import.meta.env.VITE_API_SERVER + "/api/content/1";
     const formData = new FormData();
-    console.log(body);
-    for (let key in body) {
-      console.log(key);
-      console.log(body[key]);
 
+    for (let key in body) {
       formData.append(key, body[key]);
     }
-    console.log(formData);
-    const { respon, json } = await handlePatch(api_url, formData);
+    const { respon, json } = await handlePatch(api_url, formData, user.token);
     if (!respon.ok) {
       throw Error;
     }
