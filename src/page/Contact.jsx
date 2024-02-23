@@ -18,7 +18,13 @@ export default function Contact() {
   }
   async function handleSubmit(body) {
     const api_url = import.meta.env.VITE_API_SERVER + "/api/contact/1";
-    const { respon, json } = await handlePatch(api_url, body);
+    const reqBody = JSON.stringify(body);
+    const { respon, json } = await handlePatch(
+      api_url,
+      reqBody,
+      user.token,
+      "json"
+    );
     if (!respon.ok) {
       throw Error;
     }
