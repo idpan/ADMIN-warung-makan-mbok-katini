@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import InputText from "../../../components/atom/input/InputText";
 import EditingPanel from "../../../components/molecule/EditingPanel";
 import useTumpengContext from "../../../hooks/context/useTumpengContext";
@@ -14,6 +16,8 @@ function TumpengCreate() {
   const [formValues, setFormValues] = useState({});
   const { dispatchMenu } = useTumpengContext();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
+
   const handleInputChange = (fieldName, value) => {
     setFormValues({
       ...formValues,
@@ -23,6 +27,7 @@ function TumpengCreate() {
   const handleSubmit = (event) => {
     event.preventDefault();
     addNewMenu();
+    navigate("/menu/tumpeng");
   };
   async function addNewMenu() {
     const formData = new FormData();
