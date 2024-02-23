@@ -1,10 +1,14 @@
-export default async function handlePatch(url, body, token) {
+export default async function handlePatch(url, body, token, contentType) {
+  const headers = {
+    authorization: `Bearer ${token}`,
+  };
+  if (contentType === "json") {
+    headers["Content-Type"] = "application/json";
+  }
   const respon = await fetch(url, {
     method: "PATCH",
     body: body,
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
+    headers,
   });
   const json = await respon.json();
   return { respon, json };
