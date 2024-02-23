@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import useMenuSatuanContext from "../../../hooks/context/useMenuSatuanContext";
 import InputText from "../../../components/atom/input/InputText";
 import Select from "../../../components/atom/input/Select";
@@ -11,10 +11,12 @@ import ContainerInput from "../../../components/atom/ContainerInput";
 import SubmitButton from "../../../components/atom/button/SubmitButton";
 import BackToMenuButton from "../../../components/atom/button/BackToMenuButton";
 import useAuthContext from "../../../hooks/context/useAuthContext";
+
 function MenuSatuanCreate() {
   const [formValues, setFormValues] = useState({});
   const { dispatchMenu } = useMenuSatuanContext();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   const handleInputChange = (fieldName, value) => {
     setFormValues({
       ...formValues,
@@ -24,6 +26,7 @@ function MenuSatuanCreate() {
   const handleSubmit = (event) => {
     event.preventDefault();
     addNewMenu();
+    navigate("/menu/menu-satuan");
   };
   async function addNewMenu() {
     const formData = new FormData();

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import InputText from "../../../components/atom/input/InputText";
 import EditingPanel from "../../../components/molecule/EditingPanel";
@@ -16,6 +17,8 @@ function NasiBoxCreate() {
   const [formValues, setFormValues] = useState({});
   const { dispatchMenu } = useNasiBoxContext();
   const { user } = useAuthContext();
+  const navigate = useNavigate();
+
   const handleInputChange = (fieldName, value) => {
     setFormValues({
       ...formValues,
@@ -25,6 +28,7 @@ function NasiBoxCreate() {
   const handleSubmit = (event) => {
     event.preventDefault();
     addNewMenu();
+    navigate("/menu/nasi-box");
   };
   async function addNewMenu() {
     const formData = new FormData();
