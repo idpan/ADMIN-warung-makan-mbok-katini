@@ -7,6 +7,7 @@ import useMenuSatuanContext from "../../../hooks/context/useMenuSatuanContext";
 import EditableSelect from "../EditableSelect";
 import EditableImage from "../EditableImage";
 import useAuthContext from "../../../hooks/context/useAuthContext";
+import ModalDelete from "../ModalDelete";
 
 function EditableTableRow({ rowNumber, item, onDelete }) {
   const { menu, dispatchMenu } = useMenuSatuanContext();
@@ -71,7 +72,7 @@ function EditableTableRow({ rowNumber, item, onDelete }) {
         />
       </td>
       <td className="text-center td-aksi border">
-        <DeleteMenuButton onDelete={onDelete} />
+        <ModalDelete onDelete={onDelete} id={item?.menu_satuan_id} />
       </td>
     </tr>
   );

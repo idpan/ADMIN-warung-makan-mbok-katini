@@ -2,6 +2,7 @@ import React from "react";
 
 import DetailMenuButton from "../../atom/button/DetailMenuButton";
 import DeleteMenuButton from "../../atom/button/DeleteMenuButton";
+import ModalDelete from "../ModalDelete";
 
 function TableRowWithDetail({ rowNumber, item, onDelete, menuId }) {
   return (
@@ -24,7 +25,8 @@ function TableRowWithDetail({ rowNumber, item, onDelete, menuId }) {
         <div className="flex gap-4">
           <DetailMenuButton id={menuId} />
 
-          <DeleteMenuButton onDelete={onDelete} />
+          {/* <DeleteMenuButton onDelete={onDelete} /> */}
+          <ModalDelete onDelete={onDelete} id={menuId} />
         </div>
       </td>
     </tr>

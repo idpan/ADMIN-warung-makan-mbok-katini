@@ -7,6 +7,7 @@ export default function useFetchContent() {
   const { user } = useAuthContext();
   useEffect(() => {
     async function getContent() {
+      console.log(user)
       const resContent = await fetch(
         import.meta.env.VITE_API_SERVER + "/api/content",
         {

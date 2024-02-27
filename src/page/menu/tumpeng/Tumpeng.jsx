@@ -7,6 +7,8 @@ import AddMenuButton from "../../../components/atom/button/AddMenuButton";
 import useFetchTumpeng from "../../../hooks/fetch/useFetchTumpeng";
 import PageTitle from "../../../components/atom/PageTitle";
 import useAuthContext from "../../../hooks/context/useAuthContext";
+import ModalDelete from "../../../components/molecule/ModalDelete";
+import DeleteMenuButton from "../../../components/atom/button/DeleteMenuButton";
 
 function Tumpeng() {
   const { menu, dispatchMenu } = useTumpengContext();
@@ -30,7 +32,6 @@ function Tumpeng() {
       throw Error;
     }
     if (res.ok) {
-      console.log("deleted");
       dispatchMenu({ type: "DELETE", payload: id });
     }
   }
@@ -42,13 +43,13 @@ function Tumpeng() {
     { key: "price", header: "Harga" },
     { key: "description", header: "Deskripsi" },
   ];
-
   return (
     <div className="tab-content px-8">
       <div className=" flex justify-between mt-8 mb-5">
         <h5 className="text-3xl">Tumpeng</h5>
         <AddMenuButton groupPath="tumpeng" />
       </div>
+
       <GenericTable columns={columns}>
         {menu?.map((m, index) => {
           return (
